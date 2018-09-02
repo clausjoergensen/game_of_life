@@ -26,30 +26,42 @@ GameOfLife::GameOfLife(std::vector<std::vector<int>> seed)
 
 std::vector<int> GameOfLife::neightbors(int x, int y) {
     std::vector<int> neightbors;
+    
+    int map_size_x = (int)this->map.size();
+    int map_size_y = (int)this->map.at(0).size();
+
     if ((x - 1) >= 0) {
-        neightbors.push_back(this->map.at(x - 1).at(y)); // left
+        neightbors.push_back(this->map[x - 1][y]); // left
     }
-    if ((x + 1) < (int)this->map.size()) {
-        neightbors.push_back(this->map.at(x + 1).at(y)); // right
+    
+    if ((x + 1) < map_size_x) {
+        neightbors.push_back(this->map[x + 1][y]); // right
     }
+    
     if ((y - 1) >= 0) {
-        neightbors.push_back(this->map.at(x).at(y - 1)); // top
+        neightbors.push_back(this->map[x][y - 1]); // top
     }
-    if ((y + 1) < (int)this->map.at(x).size()) {
-        neightbors.push_back(this->map.at(x).at(y + 1)); // bottom
+    
+    if ((y + 1) < map_size_y) {
+        neightbors.push_back(this->map[x][y + 1]); // bottom
     }
+    
     if ((x - 1) >= 0 && (y - 1) >= 0) {
-        neightbors.push_back(this->map.at(x - 1).at(y - 1)); // top-left
+        neightbors.push_back(this->map[x - 1][y - 1]); // top-left
     }
-    if ((x - 1) >= 0 && (y + 1) < (int)this->map.at(x - 1).size()) {
-        neightbors.push_back(this->map.at(x - 1).at(y + 1)); // bottom-left
+    
+    if ((x - 1) >= 0 && (y + 1) < map_size_y) {
+        neightbors.push_back(this->map[x - 1][y + 1]); // bottom-left
     }
-    if ((x + 1) < (int)this->map.size() && (y + 1) < (int)this->map.at(x + 1).size()) {
-        neightbors.push_back(this->map.at(x + 1).at(y + 1)); // top-right
+    
+    if ((x + 1) < map_size_x && (y + 1) < map_size_y) {
+        neightbors.push_back(this->map[x + 1][y + 1]); // top-right
     }
-    if ((x + 1) < (int)this->map.size() && (y - 1) >= 0) {
-        neightbors.push_back(this->map.at(x + 1).at(y - 1)); // bottom-right
+    
+    if ((x + 1) < map_size_x && (y - 1) >= 0) {
+        neightbors.push_back(this->map[x + 1][y - 1]); // bottom-right
     }
+
     return neightbors;
 }
 
@@ -65,7 +77,7 @@ void GameOfLife::transition() {
                 newMap[x][y] = 0; // death by under population
             } else if (numAlive > 3) {
                 newMap[x][y] = 0; // death by over population
-            } else if (this->map.at(x).at(y) == 0 && numAlive == 3) {
+            } else if (this->map[x][y] == 0 && numAlive == 3) {
                 newMap[x][y] = 1; // alive by reproduction
             } else {
                 newMap[x][y] = this->map[x][y];
@@ -79,7 +91,7 @@ std::string GameOfLife::to_string() {
     std::stringstream ss;
     for (int x = 0; x < (int)this->map.size(); x++) {
       for (int y = 0; y < (int)this->map.at(x).size(); y++) {
-        if (this->map.at(x).at(y) == 1) {
+        if (this->map[x][y] == 1) {
             ss << "+ ";
         } else {
             ss << "  ";
