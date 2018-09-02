@@ -37,7 +37,7 @@ class GameOfLife {
           newMap[x][y] = 0 // death by under population
         } else if (numAlive > 3) {
           newMap[x][y] = 0 // death by over population
-        } else if (this.map[x][y] != 1 && numAlive === 3) {
+        } else if (this.map[x][y] === 0 && numAlive === 3) {
           newMap[x][y] = 1 // alive by reproduction
         }
       }
