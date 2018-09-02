@@ -18,36 +18,36 @@ public:
     std::string to_string();
 private:
     std::vector<std::vector<int>> map;
-    std::vector<int> neightbors(unsigned int x, unsigned int y);
+    std::vector<int> neightbors(int x, int y);
 };
 
 GameOfLife::GameOfLife(std::vector<std::vector<int>> seed) 
     : map(seed) {}
 
-std::vector<int> GameOfLife::neightbors(unsigned int x, unsigned int y) {
+std::vector<int> GameOfLife::neightbors(int x, int y) {
     std::vector<int> neightbors;
     if ((x - 1) >= 0) {
         neightbors.push_back(this->map.at(x - 1).at(y)); // left
     }
-    if ((x + 1) < this->map.size()) {
+    if ((x + 1) < (int)this->map.size()) {
         neightbors.push_back(this->map.at(x + 1).at(y)); // right
     }
     if ((y - 1) >= 0) {
         neightbors.push_back(this->map.at(x).at(y - 1)); // top
     }
-    if ((y + 1) < this->map.at(x).size()) {
+    if ((y + 1) < (int)this->map.at(x).size()) {
         neightbors.push_back(this->map.at(x).at(y + 1)); // bottom
     }
     if ((x - 1) >= 0 && (y - 1) >= 0) {
         neightbors.push_back(this->map.at(x - 1).at(y - 1)); // top-left
     }
-    if ((x - 1) >= 0 && (y + 1) < this->map.at(x - 1).size()) {
+    if ((x - 1) >= 0 && (y + 1) < (int)this->map.at(x - 1).size()) {
         neightbors.push_back(this->map.at(x - 1).at(y + 1)); // bottom-left
     }
-    if ((x + 1) < this->map.size() && (y + 1) < this->map.at(x + 1).size()) {
+    if ((x + 1) < (int)this->map.size() && (y + 1) < (int)this->map.at(x + 1).size()) {
         neightbors.push_back(this->map.at(x + 1).at(y + 1)); // top-right
     }
-    if ((x + 1) < this->map.size() && (y - 1) >= 0) {
+    if ((x + 1) < (int)this->map.size() && (y - 1) >= 0) {
         neightbors.push_back(this->map.at(x + 1).at(y - 1)); // bottom-right
     }
     return neightbors;
@@ -55,8 +55,8 @@ std::vector<int> GameOfLife::neightbors(unsigned int x, unsigned int y) {
 
 void GameOfLife::transition() {
     std::vector<std::vector<int>> newMap(this->map.size(), std::vector<int>(this->map.at(0).size()));
-    for (unsigned int x = 0; x < this->map.size(); x++) {
-        for (unsigned int y = 0; y < this->map.at(x).size(); y++) {
+    for (int x = 0; x < (int)this->map.size(); x++) {
+        for (int y = 0; y < (int)this->map.at(x).size(); y++) {
             auto neightbors = this->neightbors(x, y);
             auto numAlive = std::reduce(neightbors.begin(), neightbors.end(), 0, [](int a, int c) { 
                 return c == 1 ? a + 1 : a;
@@ -77,8 +77,8 @@ void GameOfLife::transition() {
 
 std::string GameOfLife::to_string() {
     std::stringstream ss;
-    for (unsigned int x = 0; x < this->map.size(); x++) {
-      for (unsigned int y = 0; y < this->map.at(x).size(); y++) {
+    for (int x = 0; x < (int)this->map.size(); x++) {
+      for (int y = 0; y < (int)this->map.at(x).size(); y++) {
         if (this->map.at(x).at(y) == 1) {
             ss << "+ ";
         } else {
@@ -98,6 +98,16 @@ int main() {
         { 0, 0, 0, 0, 0 },
         { 0, 0, 0, 0, 0 },
     };
+
+    std::vector<std::vector<int>> toad = {
+        { 0, 0, 0, 0, 0, 0 },
+        { 0, 0, 0, 0, 0, 0 },
+        { 0, 0, 1, 1, 1, 0 },
+        { 0, 1, 1, 1, 0, 0 },
+        { 0, 0, 0, 0, 0, 0 },
+        { 0, 0, 0, 0, 0, 0 },
+    };
+
     std::vector<std::vector<int>> pentadecathlon = {
         { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
         { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 },
