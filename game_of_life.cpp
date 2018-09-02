@@ -162,6 +162,14 @@ int main() {
         { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 }
     };
 
+    // Glider, starting top-left on a 50x50 grid.
+    std::vector<std::vector<int>> glider(50, std::vector<int>(50));
+    glider[3][1] = 1;
+    glider[4][2] = 1;
+    glider[2][3] = 1;
+    glider[3][3] = 1;
+    glider[4][3] = 1;
+
     std::unique_ptr<GameOfLife> game(new GameOfLife(pentadecathlon));
 
     while (true) {
