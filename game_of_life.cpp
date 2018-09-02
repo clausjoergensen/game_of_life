@@ -18,13 +18,13 @@ public:
     std::string to_string();
 private:
     std::vector<std::vector<int>> map;
-    std::vector<int> neightbors(int x, int y);
+    std::vector<int> neightbors(unsigned int x, unsigned int y);
 };
 
 GameOfLife::GameOfLife(std::vector<std::vector<int>> seed) 
     : map(seed) {}
 
-std::vector<int> GameOfLife::neightbors(int x, int y) {
+std::vector<int> GameOfLife::neightbors(unsigned int x, unsigned int y) {
     std::vector<int> neightbors;
     if ((x - 1) >= 0) {
         neightbors.push_back(this->map.at(x - 1).at(y)); // left
@@ -55,8 +55,8 @@ std::vector<int> GameOfLife::neightbors(int x, int y) {
 
 void GameOfLife::transition() {
     std::vector<std::vector<int>> newMap(this->map.size(), std::vector<int>(this->map.at(0).size()));
-    for (int x = 0; x < this->map.size(); x++) {
-        for (int y = 0; y < this->map.at(x).size(); y++) {
+    for (unsigned int x = 0; x < this->map.size(); x++) {
+        for (unsigned int y = 0; y < this->map.at(x).size(); y++) {
             auto neightbors = this->neightbors(x, y);
             auto numAlive = std::reduce(neightbors.begin(), neightbors.end(), 0, [](int a, int c) { 
                 return c == 1 ? a + 1 : a;
@@ -77,8 +77,8 @@ void GameOfLife::transition() {
 
 std::string GameOfLife::to_string() {
     std::stringstream ss;
-    for (int x = 0; x < this->map.size(); x++) {
-      for (int y = 0; y < this->map.at(x).size(); y++) {
+    for (unsigned int x = 0; x < this->map.size(); x++) {
+      for (unsigned int y = 0; y < this->map.at(x).size(); y++) {
         if (this->map.at(x).at(y) == 1) {
             ss << "+ ";
         } else {
