@@ -80,7 +80,7 @@ void GameOfLife::transition() {
             } else if (this->map[x][y] == 0 && numAlive == 3) {
                 newMap[x][y] = 1; // alive by reproduction
             } else {
-                newMap[x][y] = this->map[x][y];
+                newMap[x][y] = this->map[x][y]; // continue unchanged
             }
         }
     }
