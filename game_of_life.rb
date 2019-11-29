@@ -1,5 +1,4 @@
-# Copyright (c) 2018 Claus Jørgensen
-require 'timeout'
+# Copyright (c) 2019 Claus Jørgensen
 
 # Conway's Game of Life
 # https:#en.wikipedia.org/wiki/Conway%27s_Game_of_Life
