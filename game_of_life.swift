@@ -34,6 +34,8 @@ struct GameOfLife: CustomStringConvertible {
                     newMap[x][y] = 0 // death by over population
                 } else if (map[x][y] == 0 && numAlive == 3) {
                     newMap[x][y] = 1 // alive by reproduction
+                } else {
+                    newMap[x][y] = map[x][y] // continue unchanged
                 }
             }
         }
