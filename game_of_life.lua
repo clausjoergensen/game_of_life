@@ -26,13 +26,13 @@ function GameOfLife:transition()
 				end
 			end
 
-            if newMap[x] == nil then
-                newMap[x] = {}
-            end
-            
-            if newMap[x][y] == nil then
-                newMap[x][y] = self.map[x][y]
-            end
+			if newMap[x] == nil then
+				newMap[x] = {}
+			end
+			
+			if newMap[x][y] == nil then
+				newMap[x][y] = self.map[x][y]
+			end
 
 			if numAlive < 2 then
 				newMap[x][y] = 0 -- death by under population
@@ -41,7 +41,7 @@ function GameOfLife:transition()
 			elseif self.map[x][y] == 0 and numAlive == 3 then
 				newMap[x][y] = 1 -- alive by reproduction
 			end
-  		end
+		end
 	end
 	self.map = newMap
 end
@@ -65,7 +65,7 @@ function GameOfLife:neightbors(x, y)
 	local neightbors = {}
 	
 	if self.map[x - 1] and self.map[x - 1][y] then
-	 	table.insert(neightbors, self.map[x - 1][y]) -- left
+		table.insert(neightbors, self.map[x - 1][y]) -- left
 	end
 	
 	if self.map[x + 1] and self.map[x + 1][y] then
