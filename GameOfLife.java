@@ -7,7 +7,7 @@ import java.io.*;
  *
  * https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
  */
-public class GameOfLife {
+public final class GameOfLife {
     private int[][] map;
 
     public GameOfLife(int[][] map) {
