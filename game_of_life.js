@@ -31,8 +31,8 @@ class GameOfLife {
         if (!newMap[x][y]) {
           newMap[x][y] = this.map[x][y]
         }
-        let neightbors = this.neightbors(x, y)
-        let numAlive = neightbors.reduce((a, c) => c === 1 ? a + 1 : a, 0)
+        let neighbors = this.neighbors(x, y)
+        let numAlive = neighbors.reduce((a, c) => c === 1 ? a + 1 : a, 0)
         if (numAlive < 2) {
           newMap[x][y] = 0 // death by under population
         } else if (numAlive > 3) {
@@ -66,37 +66,37 @@ class GameOfLife {
   }
 
   /**
-   * Gets the cell neightbors
+   * Gets the cell neighbors
    *
    * @private
    */
-  neightbors (x, y) {
-    let neightbors = []
+  neighbors (x, y) {
+    let neighbors = []
     if (this.map[x - 1] && this.map[x - 1][y]) {
-      neightbors.push(this.map[x - 1][y]) // left
+      neighbors.push(this.map[x - 1][y]) // left
     }
     if (this.map[x + 1] && this.map[x + 1][y]) {
-      neightbors.push(this.map[x + 1][y]) // right
+      neighbors.push(this.map[x + 1][y]) // right
     }
     if (this.map[x][y - 1]) {
-      neightbors.push(this.map[x][y - 1]) // top
+      neighbors.push(this.map[x][y - 1]) // top
     }
     if (this.map[x][y + 1]) {
-      neightbors.push(this.map[x][y + 1]) // bottom
+      neighbors.push(this.map[x][y + 1]) // bottom
     }
     if (this.map[x - 1] && this.map[x - 1][y - 1]) {
-      neightbors.push(this.map[x - 1][y - 1]) // top-left
+      neighbors.push(this.map[x - 1][y - 1]) // top-left
     }
     if (this.map[x - 1] && this.map[x - 1][y + 1]) {
-      neightbors.push(this.map[x - 1][y + 1]) // bottom-left
+      neighbors.push(this.map[x - 1][y + 1]) // bottom-left
     }
     if (this.map[x + 1] && this.map[x + 1][y + 1]) {
-      neightbors.push(this.map[x + 1][y + 1]) // top-right
+      neighbors.push(this.map[x + 1][y + 1]) // top-right
     }
     if (this.map[x + 1] && this.map[x + 1][y - 1]) {
-      neightbors.push(this.map[x + 1][y - 1]) // bottom-right
+      neighbors.push(this.map[x + 1][y - 1]) // bottom-right
     }
-    return neightbors
+    return neighbors
   }
 }
 

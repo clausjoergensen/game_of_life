@@ -21,7 +21,7 @@ class GameOfLife
         if !newMap[x][y]
           newMap[x][y] = @map[x][y]
         end
-        numAlive = neightbors(x, y).reduce(0) { |a, c|  c == 1 ? a + 1 : a }
+        numAlive = neighbors(x, y).reduce(0) { |a, c|  c == 1 ? a + 1 : a }
         if numAlive < 2
           newMap[x][y] = 0 # death by under population
         elsif numAlive > 3
@@ -52,34 +52,34 @@ class GameOfLife
 
   private
 
-  # Gets the cell neightbors
-  def neightbors(x, y)
-    neightbors = []
+  # Gets the cell neighbors
+  def neighbors(x, y)
+    neighbors = []
     if @map[x - 1] && @map[x - 1][y]
-      neightbors.push(@map[x - 1][y]) # left
+      neighbors.push(@map[x - 1][y]) # left
     end
     if @map[x + 1] && @map[x + 1][y] 
-      neightbors.push(@map[x + 1][y]) # right
+      neighbors.push(@map[x + 1][y]) # right
     end
     if @map[x][y - 1]
-      neightbors.push(@map[x][y - 1]) # top
+      neighbors.push(@map[x][y - 1]) # top
     end
     if @map[x][y + 1] 
-      neightbors.push(@map[x][y + 1]) # bottom
+      neighbors.push(@map[x][y + 1]) # bottom
     end
     if @map[x - 1] && @map[x - 1][y - 1]
-      neightbors.push(@map[x - 1][y - 1]) # top-left
+      neighbors.push(@map[x - 1][y - 1]) # top-left
     end
     if @map[x - 1] && @map[x - 1][y + 1] 
-      neightbors.push(@map[x - 1][y + 1]) # bottom-left
+      neighbors.push(@map[x - 1][y + 1]) # bottom-left
     end
     if @map[x + 1] && @map[x + 1][y + 1] 
-      neightbors.push(@map[x + 1][y + 1]) # top-right
+      neighbors.push(@map[x + 1][y + 1]) # top-right
     end
     if @map[x + 1] && @map[x + 1][y - 1] 
-      neightbors.push(@map[x + 1][y - 1]) # bottom-right
+      neighbors.push(@map[x + 1][y - 1]) # bottom-right
     end
-    return neightbors
+    return neighbors
   end
 
 end

@@ -18,8 +18,8 @@ public final class GameOfLife {
         var newMap = new int[this.map.length][this.map[0].length];
         for (int x = 0; x < map.length; x++) {
             for (int y = 0; y < map[x].length; y++) {
-                var neightbors = getNeightbors(x, y);
-                int numAlive = neightbors.stream().reduce(0, (a, c) -> (c == 1 ? a + 1 : a));
+                var neighbors = getNeighbors(x, y);
+                int numAlive = neighbors.stream().reduce(0, (a, c) -> (c == 1 ? a + 1 : a));
                 if (numAlive < 2) {
                     newMap[x][y] = 0; // death by under population
                 } else if (numAlive > 3) {
@@ -34,44 +34,44 @@ public final class GameOfLife {
         this.map = newMap;
     }
 
-    private List<Integer> getNeightbors(int x, int y) {
-        var neightbors = new ArrayList<Integer>();
+    private List<Integer> getNeighbors(int x, int y) {
+        var neighbors = new ArrayList<Integer>();
         int mapSizeX = this.map.length;
         int mapSizeY = this.map[0].length;
 
         if ((x - 1) >= 0) {
-            neightbors.add(map[x - 1][y]); // left
+            neighbors.add(map[x - 1][y]); // left
         }
 
         if ((x + 1) < mapSizeX) {
-            neightbors.add(map[x + 1][y]); // right
+            neighbors.add(map[x + 1][y]); // right
         }
 
         if ((y - 1) >= 0) {
-            neightbors.add(map[x][y - 1]); // top
+            neighbors.add(map[x][y - 1]); // top
         }
 
         if ((y + 1) < mapSizeY) {
-            neightbors.add(map[x][y + 1]); // bottom
+            neighbors.add(map[x][y + 1]); // bottom
         }
 
         if ((x - 1) >= 0 && (y - 1) >= 0) {
-            neightbors.add(map[x - 1][y - 1]); // top-left
+            neighbors.add(map[x - 1][y - 1]); // top-left
         }
 
         if ((x - 1) >= 0 && (y + 1) < mapSizeY) {
-            neightbors.add(map[x - 1][y + 1]); // bottom-left
+            neighbors.add(map[x - 1][y + 1]); // bottom-left
         }
 
         if ((x + 1) < mapSizeX && (y + 1) < mapSizeY) {
-            neightbors.add(map[x + 1][y + 1]); // top-right
+            neighbors.add(map[x + 1][y + 1]); // top-right
         }
 
         if ((x + 1) < mapSizeX && (y - 1) >= 0) {
-            neightbors.add(map[x + 1][y - 1]); // bottom-right
+            neighbors.add(map[x + 1][y - 1]); // bottom-right
         }
 
-        return neightbors;
+        return neighbors;
     }
 
     private String getString() {

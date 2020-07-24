@@ -3,44 +3,44 @@
 // Conway's Game of Life
 // https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life
 
-fn find_neightbors(map: &Vec<Vec<i8>>, x: usize, y: usize) -> Vec<i8> {
-    let mut neightbors: Vec<i8> = vec![];
+fn find_neighbors(map: &Vec<Vec<i8>>, x: usize, y: usize) -> Vec<i8> {
+    let mut neighbors: Vec<i8> = vec![];
     let width = map.len();
     let height = map[0].len();
 
     if x >= 1 {
-        neightbors.push(map[x - 1][y]); // left
+        neighbors.push(map[x - 1][y]); // left
     }
 
     if (x + 1) < width {
-        neightbors.push(map[x + 1][y]) // right
+        neighbors.push(map[x + 1][y]) // right
     }
 
     if y >= 1 {
-        neightbors.push(map[x][y - 1]); // top
+        neighbors.push(map[x][y - 1]); // top
     }
 
     if (y + 1) < height {
-        neightbors.push(map[x][y + 1]); // bottom
+        neighbors.push(map[x][y + 1]); // bottom
     }
 
     if x >= 1 && y >= 1 {
-        neightbors.push(map[x - 1][y - 1]); // top-left
+        neighbors.push(map[x - 1][y - 1]); // top-left
     }
 
     if x >= 1 && (y + 1) < height {
-        neightbors.push(map[x - 1][y + 1]); // bottom-left
+        neighbors.push(map[x - 1][y + 1]); // bottom-left
     }
 
     if (x + 1) < width && (y + 1) < height {
-        neightbors.push(map[x + 1][y + 1]); // top-right
+        neighbors.push(map[x + 1][y + 1]); // top-right
     }
 
     if (x + 1) < width && y >= 1 {
-        neightbors.push(map[x + 1][y - 1]); // bottom-right
+        neighbors.push(map[x + 1][y - 1]); // bottom-right
     }
 
-    return neightbors
+    return neighbors
 }
 
 fn transition(map: Vec<Vec<i8>>) -> Vec<Vec<i8>> {
@@ -50,9 +50,9 @@ fn transition(map: Vec<Vec<i8>>) -> Vec<Vec<i8>> {
     
     for x in 0..width {
         for y in 0..height {
-            let neightbors = find_neightbors(&map, x, y);
+            let neighbors = find_neighbors(&map, x, y);
             let mut num_alive = 0;
-            for n in &neightbors {
+            for n in &neighbors {
                 if *n == 1 {  num_alive += 1 }
             }
 

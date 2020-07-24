@@ -17,11 +17,11 @@ function GameOfLife:transition()
 	local newMap = {}
 	for x = 1, #self.map do
 		for y = 1, #self.map[x] do
-			local neightbors = self:neightbors(x, y)
+			local neighbors = self:neighbors(x, y)
 
 			local numAlive = 0
-			for n = 0, #neightbors do
-				if neightbors[n] == 1 then 
+			for n = 0, #neighbors do
+				if neighbors[n] == 1 then 
 					numAlive = numAlive + 1 
 				end
 			end
@@ -61,42 +61,42 @@ function GameOfLife:__tostring()
 	return output
 end
 
-function GameOfLife:neightbors(x, y)
-	local neightbors = {}
+function GameOfLife:neighbors(x, y)
+	local neighbors = {}
 	
 	if self.map[x - 1] and self.map[x - 1][y] then
-		table.insert(neightbors, self.map[x - 1][y]) -- left
+		table.insert(neighbors, self.map[x - 1][y]) -- left
 	end
 	
 	if self.map[x + 1] and self.map[x + 1][y] then
-		table.insert(neightbors, self.map[x + 1][y]) -- right
+		table.insert(neighbors, self.map[x + 1][y]) -- right
 	end
 	
 	if self.map[x][y - 1] then
-		table.insert(neightbors, self.map[x][y - 1]) -- top
+		table.insert(neighbors, self.map[x][y - 1]) -- top
 	end
 	
 	if self.map[x][y + 1] then
-		table.insert(neightbors, self.map[x][y + 1]) -- bottom
+		table.insert(neighbors, self.map[x][y + 1]) -- bottom
 	end
 	
 	if self.map[x - 1] and self.map[x - 1][y - 1] then
-		table.insert(neightbors, self.map[x - 1][y - 1]) -- top-left
+		table.insert(neighbors, self.map[x - 1][y - 1]) -- top-left
 	end
 	
 	if self.map[x - 1] and self.map[x - 1][y + 1] then
-		table.insert(neightbors, self.map[x - 1][y + 1]) -- bottom-left
+		table.insert(neighbors, self.map[x - 1][y + 1]) -- bottom-left
 	end
 	
 	if self.map[x + 1] and self.map[x + 1][y + 1] then
-		table.insert(neightbors, self.map[x + 1][y + 1]) -- top-right
+		table.insert(neighbors, self.map[x + 1][y + 1]) -- top-right
 	end
 	
 	if self.map[x + 1] and self.map[x + 1][y - 1] then
-		table.insert(neightbors, self.map[x + 1][y - 1]) -- bottom-right
+		table.insert(neighbors, self.map[x + 1][y - 1]) -- bottom-right
 	end
 	
-	return neightbors
+	return neighbors
 end
 
 local pentadecathlon = {

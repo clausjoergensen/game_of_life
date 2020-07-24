@@ -26,8 +26,8 @@ struct GameOfLife: CustomStringConvertible {
                 if newMap[x].count == 0 {
                     newMap[x] = map[x]
                 }
-                let neightbors = self.neightbors(x: x, y: y)
-                let numAlive = neightbors.reduce(into: 0) { (a, c) in a = (c == 1 ? a + 1 : a) }
+                let neighbors = self.neighbors(x: x, y: y)
+                let numAlive = neighbors.reduce(into: 0) { (a, c) in a = (c == 1 ? a + 1 : a) }
                 if (numAlive < 2) {
                     newMap[x][y] = 0 // death by under population
                 } else if (numAlive > 3) {
@@ -58,45 +58,45 @@ struct GameOfLife: CustomStringConvertible {
         return output
     }
 
-    /// Gets the cell neightbors
-    private func neightbors(x: Int, y: Int) -> [Int] {
-        var neightbors: [Int] = []
+    /// Gets the cell neighbors
+    private func neighbors(x: Int, y: Int) -> [Int] {
+        var neighbors: [Int] = []
         let mapSizeX = map.count
         let mapSizeY = map[0].count
 
         if (x - 1) >= 0 {
-            neightbors.append(map[x - 1][y]) // left
+            neighbors.append(map[x - 1][y]) // left
         }
 
         if (x + 1) < mapSizeX {
-            neightbors.append(map[x + 1][y]) // right
+            neighbors.append(map[x + 1][y]) // right
         }
 
         if (y - 1) >= 0 {
-            neightbors.append(map[x][y - 1]) // top
+            neighbors.append(map[x][y - 1]) // top
         }
 
         if (y + 1) < mapSizeY {
-            neightbors.append(map[x][y + 1]) // bottom
+            neighbors.append(map[x][y + 1]) // bottom
         }
 
         if (x - 1) >= 0 && (y - 1) >= 0 {
-            neightbors.append(map[x - 1][y - 1]) // top-left
+            neighbors.append(map[x - 1][y - 1]) // top-left
         }
 
         if (x - 1) >= 0 && (y + 1) < mapSizeY {
-            neightbors.append(map[x - 1][y + 1]) // bottom-left
+            neighbors.append(map[x - 1][y + 1]) // bottom-left
         }
 
         if (x + 1) < mapSizeX && (y + 1) < mapSizeY {
-            neightbors.append(map[x + 1][y + 1]) // top-right
+            neighbors.append(map[x + 1][y + 1]) // top-right
         }
 
         if (x + 1) < mapSizeX && (y - 1) >= 0 {
-            neightbors.append(map[x + 1][y - 1]) // bottom-right
+            neighbors.append(map[x + 1][y - 1]) // bottom-right
         }
 
-        return neightbors
+        return neighbors
     }
 }
 

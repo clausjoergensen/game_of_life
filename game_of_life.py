@@ -35,7 +35,7 @@ class GameOfLife(object):
           newMap.insert(x, [])
         if len(newMap[x]) <= y:
           newMap[x].insert(y, self.map[x][y])
-        numAlive = reduce(lambda a, c: a + 1 if c == 1 else a, self.neightbors(x, y))
+        numAlive = reduce(lambda a, c: a + 1 if c == 1 else a, self.neighbors(x, y))
         if numAlive < 2:
           newMap[x][y] = 0 # death by under population
         elif numAlive > 3:
@@ -58,28 +58,28 @@ class GameOfLife(object):
       output += "\n"
     return output
 
-  def neightbors(self, x, y):
+  def neighbors(self, x, y):
     """
-    Gets the cell neightbors
+    Gets the cell neighbors
     """
-    neightbors = []
+    neighbors = []
     if self.map[x - 1] >= 0 and self.map[x - 1][y] >= 0:
-      neightbors.append(self.map[x - 1][y]) # left
+      neighbors.append(self.map[x - 1][y]) # left
     if self.map[x + 1] >= 0 and self.map[x + 1][y]:
-      neightbors.append(self.map[x + 1][y]) # right
+      neighbors.append(self.map[x + 1][y]) # right
     if self.map[x][y - 1] >= 0:
-      neightbors.append(self.map[x][y - 1]) # top
+      neighbors.append(self.map[x][y - 1]) # top
     if self.map[x][y + 1] >= 0:
-      neightbors.append(self.map[x][y + 1]) # bottom
+      neighbors.append(self.map[x][y + 1]) # bottom
     if self.map[x - 1] >= 0 and self.map[x - 1][y - 1] >= 0:
-      neightbors.append(self.map[x - 1][y - 1]) # top-left
+      neighbors.append(self.map[x - 1][y - 1]) # top-left
     if self.map[x - 1] >= 0 and self.map[x - 1][y + 1] >= 0:
-      neightbors.append(self.map[x - 1][y + 1]) # bottom-left
+      neighbors.append(self.map[x - 1][y + 1]) # bottom-left
     if self.map[x + 1] >= 0 and self.map[x + 1][y + 1] >= 0:
-      neightbors.append(self.map[x + 1][y + 1]) # top-right
+      neighbors.append(self.map[x + 1][y + 1]) # top-right
     if self.map[x + 1] >= 0 and self.map[x + 1][y - 1] >= 0:
-      neightbors.append(self.map[x + 1][y - 1]) # bottom-right
-    return neightbors
+      neighbors.append(self.map[x + 1][y - 1]) # bottom-right
+    return neighbors
 
 pentadecathlon = [
   [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],

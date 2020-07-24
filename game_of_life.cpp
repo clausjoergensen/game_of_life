@@ -18,59 +18,59 @@ public:
     std::string to_string();
 private:
     std::vector<std::vector<int>> map;
-    std::vector<int> neightbors(int x, int y);
+    std::vector<int> neighbors(int x, int y);
 };
 
 GameOfLife::GameOfLife(std::vector<std::vector<int>> seed) 
     : map(seed) {}
 
-std::vector<int> GameOfLife::neightbors(int x, int y) {
-    std::vector<int> neightbors;
+std::vector<int> GameOfLife::neighbors(int x, int y) {
+    std::vector<int> neighbors;
     
     int map_size_x = (int)this->map.size();
     int map_size_y = (int)this->map.at(0).size();
 
     if ((x - 1) >= 0) {
-        neightbors.push_back(this->map[x - 1][y]); // left
+        neighbors.push_back(this->map[x - 1][y]); // left
     }
     
     if ((x + 1) < map_size_x) {
-        neightbors.push_back(this->map[x + 1][y]); // right
+        neighbors.push_back(this->map[x + 1][y]); // right
     }
     
     if ((y - 1) >= 0) {
-        neightbors.push_back(this->map[x][y - 1]); // top
+        neighbors.push_back(this->map[x][y - 1]); // top
     }
     
     if ((y + 1) < map_size_y) {
-        neightbors.push_back(this->map[x][y + 1]); // bottom
+        neighbors.push_back(this->map[x][y + 1]); // bottom
     }
     
     if ((x - 1) >= 0 && (y - 1) >= 0) {
-        neightbors.push_back(this->map[x - 1][y - 1]); // top-left
+        neighbors.push_back(this->map[x - 1][y - 1]); // top-left
     }
     
     if ((x - 1) >= 0 && (y + 1) < map_size_y) {
-        neightbors.push_back(this->map[x - 1][y + 1]); // bottom-left
+        neighbors.push_back(this->map[x - 1][y + 1]); // bottom-left
     }
     
     if ((x + 1) < map_size_x && (y + 1) < map_size_y) {
-        neightbors.push_back(this->map[x + 1][y + 1]); // top-right
+        neighbors.push_back(this->map[x + 1][y + 1]); // top-right
     }
     
     if ((x + 1) < map_size_x && (y - 1) >= 0) {
-        neightbors.push_back(this->map[x + 1][y - 1]); // bottom-right
+        neighbors.push_back(this->map[x + 1][y - 1]); // bottom-right
     }
 
-    return neightbors;
+    return neighbors;
 }
 
 void GameOfLife::transition() {
     std::vector<std::vector<int>> newMap(this->map.size(), std::vector<int>(this->map.at(0).size()));
     for (int x = 0; x < (int)this->map.size(); x++) {
         for (int y = 0; y < (int)this->map.at(x).size(); y++) {
-            auto neightbors = this->neightbors(x, y);
-            auto numAlive = std::reduce(neightbors.begin(), neightbors.end(), 0, [](int a, int c) { 
+            auto neighbors = this->neighbors(x, y);
+            auto numAlive = std::reduce(neighbors.begin(), neighbors.end(), 0, [](int a, int c) { 
                 return c == 1 ? a + 1 : a;
             });
             if (numAlive < 2) {
