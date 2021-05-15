@@ -9,11 +9,11 @@
 #include <string.h>
 
 int find_neighbors(char neighbors[8],
-                    const int width,
-                    const int height,
-                    const char map[width][height],
-                    const int x,
-                    const int y) {
+                   const int width,
+                   const int height,
+                   const char map[width][height],
+                   const int x,
+                   const int y) {
     int count = 0;
     if ((x - 1) >= 0) {
         neighbors[count++] = map[x - 1][y]; // left
